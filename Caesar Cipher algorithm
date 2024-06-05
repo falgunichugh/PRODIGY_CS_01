@@ -1,0 +1,21 @@
+import getpass
+
+print("Caesar Cipher program")
+mode = input("Type 'Encrypt' to encrypt, 'Decrypt' to decrypt:").strip().lower()
+
+if mode not in ['encrypt', 'decrypt']:
+    print("Invalid mode")
+else:
+    text = getpass.getpass("Enter your message (input will be hidden):")
+    shift = int(input("Enter the shift value:"))
+    
+    result = ""
+    for char in text:
+        if char.isalpha():
+            shift_base = ord('A') if char.isupper() else ord('a')
+            shift_amount = shift if mode == 'encrypt' else -shift
+            result += chr((ord(char) - shift_base + shift_amount) % 26 + shift_base)
+        else:
+            result += char
+
+    print("Result:", result)
